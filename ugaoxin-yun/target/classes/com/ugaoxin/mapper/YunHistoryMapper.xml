@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ugaoxin.dao.YunHistoryMapper" >
+  <resultMap id="BaseResultMap" type="com.ugaoxin.bean.YunHistory" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="admin_name" property="adminName" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="do_href" property="doHref" jdbcType="VARCHAR" />
+    <result column="in_status" property="inStatus" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, admin_name, content, do_href, in_status, ip, update_time, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from yun_history
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from yun_history
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ugaoxin.bean.YunHistory" >
+    insert into yun_history (id, admin_name, content, 
+      do_href, in_status, ip, 
+      update_time, remark)
+    values (#{id,jdbcType=BIGINT}, #{adminName,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{doHref,jdbcType=VARCHAR}, #{inStatus,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ugaoxin.bean.YunHistory" >
+    insert into yun_history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="adminName != null" >
+        admin_name,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="doHref != null" >
+        do_href,
+      </if>
+      <if test="inStatus != null" >
+        in_status,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="adminName != null" >
+        #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="doHref != null" >
+        #{doHref,jdbcType=VARCHAR},
+      </if>
+      <if test="inStatus != null" >
+        #{inStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ugaoxin.bean.YunHistory" >
+    update yun_history
+    <set >
+      <if test="adminName != null" >
+        admin_name = #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="doHref != null" >
+        do_href = #{doHref,jdbcType=VARCHAR},
+      </if>
+      <if test="inStatus != null" >
+        in_status = #{inStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ugaoxin.bean.YunHistory" >
+    update yun_history
+    set admin_name = #{adminName,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      do_href = #{doHref,jdbcType=VARCHAR},
+      in_status = #{inStatus,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

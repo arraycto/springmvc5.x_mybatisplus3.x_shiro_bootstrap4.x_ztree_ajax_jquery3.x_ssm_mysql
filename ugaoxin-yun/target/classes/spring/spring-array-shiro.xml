@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd 
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop.xsd 
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd 
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx.xsd">
+	<!-- web.xml中shiro的filter对应的bean -->
+	<!-- 会话ID生成器 -->
+    <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
+
+    <!-- 会话Cookie模板 -->
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="sid"/>
+        <property name="httpOnly" value="true"/>
+        <property name="maxAge" value="6000000"/>
+    </bean> 
+	<!-- Shiro 的Web过滤器 -->
+	<!-- setter -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<!--  -->
+		<property name="securityManager" ref="securityManager"/>
+		 <property name="loginUrl" value="/yun/login/plogin"/>  
+		<!-- 默认成功认证后，就是回到上次要访问地址 -->
+		<!-- 如果配置，成功认证后跳转到index地址，潜规则不配置  --> 
+		<property name="successUrl" value="index.jsp"/> 
+		<!-- 没有权限跳转的url： 用户访问未对其授权的资源时,所显示的连接  -->
+        <property name="unauthorizedUrl" value="/unauth"/>
+		<property name="filterChainDefinitions">
+		 
+			<value>
+				/css/**=anon
+				/js/**=anon
+				/theme/**=anon
+				/static/**=anon
+				/yun/login/**=anon
+				/yun/login/plogin/**=anon
+				/yun/getMenusList=anon
+				/yun/index/**=anon
+				/druid/**=anon
+				/account/active=anon
+				/json/**=anon
+				/loginOut=logout
+				/**=user
+			</value>
+		</property>
+	</bean>
+	
+	<!-- 安全管理器定义 -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="yunAuthorizingRealm"></property>
+		<property name="cacheManager" ref="cacheManager" />
+		<!-- 注入session管理器 -->
+		<property name="sessionManager" ref="sessionManager" />
+	</bean>
+	
+	<!-- 会话管理器 -->
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <!-- session的失效时长，单位毫秒 -->
+        <property name="globalSessionTimeout" value="86400000"/>
+        <!-- 删除失效的session -->
+        <property name="deleteInvalidSessions" value="true"/>
+    </bean>
+	
+	
+		<!-- shiro的自定义授权 -->
+	<bean id="yunAuthorizingRealm" class="com.ugaoxin.shiro.YunAuthorizingRealm">
+		<!-- 将凭证匹配器设置到realm中，realm按照凭证匹配器的要求进行散列 -->
+		<property name="credentialsMatcher" ref="credentialsMatcher"/>
+	</bean>
+	
+	 
+	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+    	<property name="cacheManagerConfigFile" value="classpath:spring/spring-shiro-ehcache.xml"/>
+    </bean>
+	
+	
+	<!-- 凭证匹配器 -->
+	<bean id="credentialsMatcher"
+		class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+		<property name="hashAlgorithmName" value="md5" />
+		<property name="hashIterations" value="1" />
+	</bean>
+
+</beans>

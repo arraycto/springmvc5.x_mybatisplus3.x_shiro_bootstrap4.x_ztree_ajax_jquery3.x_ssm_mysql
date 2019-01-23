@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ugaoxin.dao.YunRolesMenusMapper" >
+  <resultMap id="BaseResultMap" type="com.ugaoxin.bean.YunRolesMenusKey" >
+    <id column="m_id" property="mId" jdbcType="BIGINT" />
+    <id column="r_id" property="rId" jdbcType="BIGINT" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.ugaoxin.bean.YunRolesMenusKey" >
+    delete from yun_roles_menus
+    where m_id = #{mId,jdbcType=BIGINT}
+      and r_id = #{rId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ugaoxin.bean.YunRolesMenusKey" >
+    insert into yun_roles_menus (m_id, r_id)
+    values (#{mId,jdbcType=BIGINT}, #{rId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ugaoxin.bean.YunRolesMenusKey" >
+    insert into yun_roles_menus
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mId != null" >
+        m_id,
+      </if>
+      <if test="rId != null" >
+        r_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mId != null" >
+        #{mId,jdbcType=BIGINT},
+      </if>
+      <if test="rId != null" >
+        #{rId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

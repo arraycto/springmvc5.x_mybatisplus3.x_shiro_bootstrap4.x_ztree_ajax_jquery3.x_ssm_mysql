@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+ 
+	<!-- 加载配置文件   Array老师提醒：可以采用druid也可以采用c3p0-->
+	<context:property-placeholder location="classpath:properties/*.properties"/>
+	<!-- 数据库连接池  druid   微服务：dubbo：老师主页：点击课程的老师头像或者搜索 Array老师-->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		destroy-method="close">
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="maxActive" value="10" />
+		<property name="minIdle" value="5" />
+		<property name="filters" value="stat" />
+	</bean>
+ 
+	<!-- MyBatis SqlSessionFactoryBean 配置 -->
+	<!-- 注意：这里使用的是MP的MybatisSqlSessionFactoryBean,而不是Mybatis的,因为MP需要进行相应代理 -->
+	<bean id="sqlSessionFactory"
+		class="com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean">
+		<description>spring和MyBatis完美整合,不需要mybatis的配置映射文件</description>
+		<!-- 配置数据源 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 配置Mybatis配置文件 -->
+		<property name="configLocation" value="classpath:mybatis/mybatis-array.xml" />
+		<!-- 配置别名包路径 -->
+		<property name="typeAliasesPackage" value="com.ugaoxin.bean" />
+		<!-- 配置枚举扫描 -->
+		<property name="typeEnumsPackage" value="com.ugaoxin.enums"/>
+		<!-- 配置Mapper扫描路径（IDEA系列编辑器需要特别注意,因为IDEA的设置问题,src中的xml文件是不会被编译的,如果放在src中可能会报错,解决办法详见 
+			常用问题-Invalid bound statement (not found) 错误如何解决?） -->
+		<property name="mapperLocations" value="classpath:com/ugaoxin/mapper/*.xml" />
+		<!-- 插件配置项 -->
+		<property name="plugins">
+			<array>
+				<!-- 分页插件配置 -->
+				<bean id="paginationInterceptor"
+					class="com.baomidou.mybatisplus.plugins.PaginationInterceptor">
+					<property name="dialectType" value="mysql" />
+				</bean>
+			</array>
+		</property>
+		<!-- 全局配置注入 -->
+		<property name="globalConfig" ref="globalConfig" />
+	</bean>
+	
+	<bean id="globalConfig" class="com.baomidou.mybatisplus.entity.GlobalConfiguration">
+		<!-- AUTO->`0`("数据库ID自增") INPUT->`1`(用户输入ID") ID_WORKER->`2`("全局唯一ID") 
+			UUID->`3`("全局唯一ID") -->
+		<property name="idType" value="0" />
+		<!-- MYSQL->`mysql` ORACLE->`oracle` DB2->`db2` H2->`h2` HSQL->`hsql` SQLITE->`sqlite` 
+			POSTGRE->`postgresql` SQLSERVER2005->`sqlserver2005` SQLSERVER->`sqlserver` -->
+		<!-- Oracle需要添加该项 -->
+		<!-- <property name="dbType" value="oracle" /> -->
+		<!-- 全局表为下划线命名设置 true -->
+		 <property name="dbColumnUnderline" value="true" /> 
+	</bean>
+
+	<!-- MyBatis 动态实现:DAO接口所在包名,Spring会自动查找其下的类 -->
+	<bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 对Dao 接口动态实现,需要知道接口在哪 -->
+		<property name="basePackage" value="com.ugaoxin.dao" />
+	</bean>
+	 
+	 
+	
+	<!-- 谷歌研发的，最好用的验证码框架 -->
+	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">  
+        <property name="config">  
+            <bean class="com.google.code.kaptcha.util.Config">  
+                <constructor-arg>  
+                    <props>  
+                        <prop key="kaptcha.border">no</prop>  
+                        <!--  <prop key="kaptcha.border.color">109,17,86</prop>   -->
+                        <prop key="kaptcha.textproducer.font.color">0,255,255</prop>  
+                        <prop key="kaptcha.image.width">185</prop>  
+                        <prop key="kaptcha.image.height">45</prop>  
+                        <prop key="kaptcha.textproducer.font.size">45</prop>  
+                        <prop key="kaptcha.session.key">code</prop>  
+                        <prop key="kaptcha.textproducer.char.length">5</prop>  <!-- 当前验证码多少位 -->
+                        <prop key="kaptcha.textproducer.char.space">10</prop>  
+                        <prop key="kaptcha.noise.color">white</prop>  
+                        <prop key="kaptcha.textproducer.font.names">楷体,微软雅黑</prop>  
+                        <prop key="kaptcha.background.clear.from">90,150,136</prop>
+                    </props>  
+                </constructor-arg>  
+            </bean>  
+        </property>  
+    </bean>
+</beans>

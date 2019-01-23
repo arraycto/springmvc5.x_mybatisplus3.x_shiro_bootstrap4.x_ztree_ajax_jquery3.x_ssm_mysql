@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ehcache.xsd"
+         updateCheck="false" monitoring="autodetect"
+         dynamicConfig="true">
+         
+    <!-- 
+    	l  user.home：用户的家目录。
+    	l  user.dir：用户的当前工作目录。
+    	l  java.io.tmpdir：Java临时目录。
+    	l  在命令行指定的属性，如“java -Dehcache.disk.store.dir=F:\\123 …..”。
+    	 -->
+    <diskStore path="java.io.tmpdir/array-ehcache"/>
+    
+    <!-- 系统默认缓存 -->
+    <defaultCache
+    	   maxElementsInMemory="50000"
+    	   clearOnFlush="false"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="3600"
+           overflowToDisk="true"
+           diskSpoolBufferSizeMB="1024"
+           maxElementsOnDisk="100000"
+           diskPersistent="false"
+           diskExpiryThreadIntervalSeconds="120"
+           memoryStoreEvictionPolicy="LFU"
+           transactionalMode="off">
+    </defaultCache>
+    
+     <!-- 登录记录,缓存时效： 60分钟失效--> 
+     <cache name="passwordRetryCache"
+    	   maxElementsInMemory="50000"
+    	   clearOnFlush="false"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="0"
+           overflowToDisk="true"
+           diskSpoolBufferSizeMB="1024"
+           maxElementsOnDisk="100000"
+           diskPersistent="false"
+           diskExpiryThreadIntervalSeconds="120"
+           memoryStoreEvictionPolicy="LFU"
+           transactionalMode="off">
+     </cache>
+
+</ehcache>
+ 
