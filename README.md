@@ -45,3 +45,5 @@ API
 日志管理：SLF4J、Log4j  
 模版技术：FreeMarker  
 页面交互：BootStrap、Layer等  
+
+本项目自己录制的视频教程地址：https://study.163.com/course/courseMain.htm?share=2&shareId=1023275352&courseId=1006183001&_trace_c_p_k2_=c5f48d685b0c48aba2a0da1b73b46b68
