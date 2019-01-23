@@ -1,2 +1,4 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+*.js linguist-language=js
+*.css linguist-language=css
+*.html linguist-language=java
+##设置语言
