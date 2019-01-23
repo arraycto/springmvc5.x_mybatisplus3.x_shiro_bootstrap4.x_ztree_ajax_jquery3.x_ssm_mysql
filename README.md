@@ -4,25 +4,25 @@
          所有JAVA框架研发人员，想通过实战应对【java面试题】的活面试题，零基础的java学习路线
  
  
-开发环境：Eclipse ，JDK 1.8 ，Tomcat7
-技术选型：
-后端技术
-核心框架：Spring Framework 4.X
-视图框架：Spring MVC 4.X
-任务调度：Spring + Quartz 2.2.3
-持久层框架：MyBatis 3.X + Mybatis-plus 2.1.8
-日志管理：SLF4J 1.7 + Log4j2 2.7
-工具类：Apache Commons、Jackson 2.2、fastjson 1.2.20
-前端技术
-JS框架：Jquery
-表格插件：Bootstrap Table
-表单验证插件：BootstrapValidator
-日期选择插件：Datepicker for Bootstrap
-弹层组件：Layer，LayUI
-数据图表：Echarts
-表单美化插件：ICheck
-树形视图插件：Ztree 
-数据库 
+开发环境：Eclipse ，JDK 1.8 ，Tomcat7  
+技术选型：  
+后端技术  
+核心框架：Spring Framework 4.X  
+视图框架：Spring MVC 4.X  
+任务调度：Spring + Quartz 2.2.3  
+持久层框架：MyBatis 3.X + Mybatis-plus 2.1.8  
+日志管理：SLF4J 1.7 + Log4j2 2.7  
+工具类：Apache Commons、Jackson 2.2、fastjson 1.2.20  
+前端技术  
+JS框架：Jquery  
+表格插件：Bootstrap Table  
+表单验证插件：BootstrapValidator  
+日期选择插件：Datepicker for Bootstrap  
+弹层组件：Layer，LayUI  
+数据图表：Echarts  
+表单美化插件：ICheck  
+树形视图插件：Ztree   
+数据库   
       Mysql5+Druid
 
 IDE
