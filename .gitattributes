@@ -1,3 +1,4 @@
-*.js linguist-language=java
-*.css linguist-language=java
+*.js linguist-language=js
+*.css linguist-language=css
 *.html linguist-language=java
+##设置语言
