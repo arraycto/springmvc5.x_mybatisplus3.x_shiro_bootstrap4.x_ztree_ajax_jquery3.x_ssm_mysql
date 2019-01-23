@@ -22,26 +22,26 @@ JS框架：Jquery
 数据图表：Echarts  
 表单美化插件：ICheck  
 树形视图插件：Ztree   
-数据库   
-      Mysql5+Druid
+数据库      
+      Mysql5+Druid  
 
-IDE
-      Eclipse，MyEclipse，Intellij Idea 
-JDK环境
-          jdk6以上
+IDE  
+      Eclipse，MyEclipse，Intellij Idea    
+JDK环境  
+          jdk6以上  
 
 
-Maven环境
-          Maven
+Maven环境  
+          Maven  
 
-API
-         实现restful风格项目实例 
-安全框架：Apache Shiro
-视图框架：Spring MVC
-持久层框架：MyBatis MyBatisPlus
-缓存技术：EhCache,Redis
-定时器：Quartz
-数据库连接池：Druid
-日志管理：SLF4J、Log4j
-模版技术：FreeMarker
-页面交互：BootStrap、Layer等
+API  
+         实现restful风格项目实例   
+安全框架：Apache Shiro  
+视图框架：Spring MVC  
+持久层框架：MyBatis MyBatisPlus  
+缓存技术：EhCache,Redis  
+定时器：Quartz  
+数据库连接池：Druid  
+日志管理：SLF4J、Log4j  
+模版技术：FreeMarker  
+页面交互：BootStrap、Layer等  
