@@ -1,7 +1,7 @@
 # springmvc5.x_mybatisplus3.x_shiro_bootstrap4.x_ztree_ajax_jquery3.x_ssm_mysql
 企业通用云平台系统（版本明确版）
 学习对象：
-         所有JAVA框架研发人员，想通过实战应对【java面试题】的活面试题，零基础的java学习路线
+         所有JAVA框架研发人员 
  
  
 开发环境：Eclipse ，JDK 1.8 ，Tomcat7  
